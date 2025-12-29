@@ -36,14 +36,7 @@ async function getLatest(): Promise<PSA[] | null> {
   const response = await Ape.psas.get();
 
   if (response.status === 500) {
-    if (isDevEnvironment()) {
-      Notifications.addPSA(
-        "Dev Info: Backend server not running",
-        0,
-        "exclamation-triangle",
-        false,
-      );
-    } else {
+    if (!isDevEnvironment()) {
       type InstatusSummary = {
         page: {
           name: string;

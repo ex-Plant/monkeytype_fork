@@ -84,12 +84,12 @@ export async function init(callback: ReadyCallback): Promise<void> {
     console.error("Firebase failed to initialize", e);
     await callback(false, null);
     if (isDevEnvironment()) {
-      Notifications.addPSA(
-        createErrorMessage(e, "Firebase uninitialized"),
-        0,
-        undefined,
-        false,
-      );
+      // Notifications.addPSA(
+      //   createErrorMessage(e, "Firebase uninitialized"),
+      //   0,
+      //   undefined,
+      //   false,
+      // );
     }
   } finally {
     resolveAuthPromise();
