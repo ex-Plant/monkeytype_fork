@@ -1190,6 +1190,7 @@ export async function finish(difficultyFailed = false): Promise<void> {
     !isComingFromPractice
   ) {
     console.log("🎯 Automatically starting practice mode for failed test...");
+    console.log("📊 missedWords at practice start:", TestInput.missedWords);
     if (PractiseWords.init("words", false)) {
       TestState.setResultVisible(false);
       TestUI.setResultCalculating(false);

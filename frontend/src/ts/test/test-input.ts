@@ -532,6 +532,10 @@ export function pushBurstToHistory(speed: number): void {
 }
 
 export function restart(): void {
+  console.log(
+    `🔄 TestInput.restart() called. missedWords before:`,
+    missedWords,
+  );
   wpmHistory = [];
   rawHistory = [];
   burstHistory = [];
@@ -550,4 +554,8 @@ export function restart(): void {
     correct: 0,
     incorrect: 0,
   };
+  console.log(
+    `🔄 TestInput.restart() completed. missedWords after:`,
+    missedWords,
+  );
 }
