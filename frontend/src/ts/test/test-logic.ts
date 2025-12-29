@@ -1179,6 +1179,27 @@ export async function finish(difficultyFailed = false): Promise<void> {
     dontSave = true;
   }
 
+  // Check if test failed and automatically start practice words with biwords
+  // Only trigger if we're not already coming from a practice session
+  const testFailed = difficultyFailed || afkDetected || tooShort || dontSave;
+  const isComingFromPractice = PractiseWords.before.mode !== null;
+
+  if (
+    testFailed &&
+    Object.keys(TestInput.missedWords).length > 0 &&
+    !isComingFromPractice
+  ) {
+    console.log("🎯 Automatically starting practice mode for failed test...");
+    if (PractiseWords.init("words", false)) {
+      TestState.setResultVisible(false);
+      TestUI.setResultCalculating(false);
+      // Hide the loading spinner since we're not showing results
+      $(".pageTest .loading").addClass("hidden");
+      restart({ practiseMissed: true, noAnim: true });
+      return;
+    }
+  }
+
   const resultUpdatePromise = Result.update(
     completedEvent,
     difficultyFailed,

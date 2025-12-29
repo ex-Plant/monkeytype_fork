@@ -213,6 +213,8 @@ export let keypressCountHistory: number[] = [];
 let currentKeypressCount = 0;
 export let currentBurstStart = 0;
 export let missedWords: Record<string, number> = {};
+
+console.log(`🔍 missedWords initialized:`, missedWords);
 export let accuracy = {
   correct: 0,
   incorrect: 0,
@@ -509,6 +511,7 @@ export function pushMissedWord(word: string): void {
   } else {
     (missedWords[word] as number)++;
   }
+  console.log(`➕ Added missed word "${word}":`, missedWords);
 }
 
 export function pushToWpmHistory(wpm: number): void {
@@ -542,7 +545,7 @@ export function restart(): void {
     words: [],
   };
   currentBurstStart = 0;
-  missedWords = {};
+  // missedWords = {};
   accuracy = {
     correct: 0,
     incorrect: 0,

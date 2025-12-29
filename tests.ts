@@ -3,8 +3,6 @@ const myText =
 
 const myArr = myText.split(" ");
 
-console.log("ex-Plant_custom.ts:10 - myArr:", myArr);
-
 export const exPlantCustomTextSettings = {
   text: ["The", "❤️", "brown", "srox", "jumps", "over", "the", "lazy", "dog"],
   mode: "repeat",

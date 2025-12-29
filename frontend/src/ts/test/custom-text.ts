@@ -1,5 +1,5 @@
 import { CustomTextLimitMode, CustomTextMode } from "@monkeytype/schemas/util";
-import { exPlantCustomTextSettings } from "../../../🍆/ex-Plant_custom";
+import { exPlantCustomTextSettings } from "../../../ex_plant/ex-Plant_custom";
 import { LocalStorageWithSchema } from "../utils/local-storage-with-schema";
 import { z } from "zod";
 import { CompletedEventCustomTextSchema } from "@monkeytype/schemas/results";
