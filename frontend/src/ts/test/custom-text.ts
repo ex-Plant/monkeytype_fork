@@ -1,4 +1,5 @@
 import { CustomTextLimitMode, CustomTextMode } from "@monkeytype/schemas/util";
+import { exPlantCustomTextSettings } from "../../../🍆/ex-Plant_custom";
 import { LocalStorageWithSchema } from "../utils/local-storage-with-schema";
 import { z } from "zod";
 import { CompletedEventCustomTextSchema } from "@monkeytype/schemas/results";
@@ -32,24 +33,26 @@ export const CustomTextSettingsSchema = CompletedEventCustomTextSchema.omit({
 
 export type CustomTextSettings = z.infer<typeof CustomTextSettingsSchema>;
 
-type CustomTextLimit = z.infer<typeof CustomTextSettingsSchema>["limit"];
+export type CustomTextLimit = z.infer<typeof CustomTextSettingsSchema>["limit"];
 
-const defaultCustomTextSettings: CustomTextSettings = {
-  text: [
-    "The",
-    "quick",
-    "brown",
-    "srox",
-    "jumps",
-    "over",
-    "the",
-    "lazy",
-    "dog",
-  ],
-  mode: "repeat",
-  limit: { value: 9, mode: "word" },
-  pipeDelimiter: false,
-};
+// const defaultCustomTextSettings: CustomTextSettings = {
+//   text: [
+//     "The",
+//     "quick",
+//     "brown",
+//     "srox",
+//     "jumps",
+//     "over",
+//     "the",
+//     "lazy",
+//     "dog",
+//   ],
+//   mode: "repeat",
+//   limit: { value: 9, mode: "word" },
+//   pipeDelimiter: false,
+// };
+
+const defaultCustomTextSettings = exPlantCustomTextSettings;
 
 const customTextSettings = new LocalStorageWithSchema({
   key: "customTextSettings",
