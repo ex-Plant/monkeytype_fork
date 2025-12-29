@@ -169,7 +169,7 @@ export async function onInsertText(options: OnInsertTextParams): Promise<void> {
   TestInput.pushKeypressWord(wordIndex);
   if (!correct) {
     TestInput.incrementKeypressErrors();
-    TestInput.pushMissedWord(TestWords.words.getCurrent());
+    TestInput.markCurrentWordAsMissed();
   }
   if (Config.keymapMode === "react") {
     void KeymapEvent.flash(data, correct);

@@ -64,6 +64,9 @@ export async function goToNextWord({
 
   Funbox.toggleScript(TestWords.words.get(TestState.activeWordIndex + 1));
 
+  // Count word as missed if it had any errors (once per word, not per letter)
+  TestInput.countCompletedWordAsMissed(TestWords.words.getCurrent());
+
   TestInput.input.pushHistory();
   TestInput.corrected.pushHistory();
 

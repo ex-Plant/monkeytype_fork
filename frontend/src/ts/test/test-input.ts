@@ -3,6 +3,8 @@ import { mean, roundTo2 } from "@monkeytype/util/numbers";
 import * as TestState from "./test-state";
 import Config from "../config";
 import { getInputElementValue } from "../input/input-element";
+import { LocalStorageWithSchema } from "../utils/local-storage-with-schema";
+import { z } from "zod";
 
 const keysToTrack = new Set([
   "NumpadMultiply",
@@ -212,9 +214,22 @@ export const corrected = new Corrected();
 export let keypressCountHistory: number[] = [];
 let currentKeypressCount = 0;
 export let currentBurstStart = 0;
-export let missedWords: Record<string, number> = {};
+// Schema for missedWords localStorage
+const MissedWordsSchema = z.record(z.string(), z.number());
 
-console.log(`🔍 missedWords initialized:`, missedWords);
+// LocalStorage instance for missedWords persistence
+const missedWordsLS = new LocalStorageWithSchema({
+  key: "missedWords",
+  schema: MissedWordsSchema,
+  fallback: {},
+});
+
+// Initialize missedWords from localStorage
+export let missedWords: Record<string, number> = missedWordsLS.get();
+
+// Track if current word has any errors (for counting once per word)
+let currentWordHasErrors = false;
+
 export let accuracy = {
   correct: 0,
   incorrect: 0,
@@ -505,13 +520,24 @@ export function resetKeypressTimings(): void {
   console.debug("Keypress timings reset");
 }
 
-export function pushMissedWord(word: string): void {
-  if (!Object.keys(missedWords).includes(word)) {
-    missedWords[word] = 1;
-  } else {
-    (missedWords[word] as number)++;
+// Mark that current word has an error (called for each wrong letter)
+export function markCurrentWordAsMissed(): void {
+  currentWordHasErrors = true;
+}
+
+// Count the completed word as missed (called once per word)
+export function countCompletedWordAsMissed(word: string): void {
+  if (currentWordHasErrors) {
+    if (!Object.keys(missedWords).includes(word)) {
+      missedWords[word] = 1;
+    } else {
+      (missedWords[word] as number)++;
+    }
+    // Save to localStorage
+    missedWordsLS.set(missedWords);
   }
-  console.log(`➕ Added missed word "${word}":`, missedWords);
+  // Reset for next word
+  currentWordHasErrors = false;
 }
 
 export function pushToWpmHistory(wpm: number): void {
@@ -532,10 +558,6 @@ export function pushBurstToHistory(speed: number): void {
 }
 
 export function restart(): void {
-  console.log(
-    `🔄 TestInput.restart() called. missedWords before:`,
-    missedWords,
-  );
   wpmHistory = [];
   rawHistory = [];
   burstHistory = [];
@@ -549,13 +571,11 @@ export function restart(): void {
     words: [],
   };
   currentBurstStart = 0;
+  // Keep missedWords - they persist across tests and browser sessions now
   // missedWords = {};
+  currentWordHasErrors = false; // Reset error tracking for new test
   accuracy = {
     correct: 0,
     incorrect: 0,
   };
-  console.log(
-    `🔄 TestInput.restart() completed. missedWords after:`,
-    missedWords,
-  );
 }
