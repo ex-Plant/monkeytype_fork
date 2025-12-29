@@ -3,7 +3,7 @@ import { text1 } from "./texts/text1";
 
 const myArr = text1.split(" ").filter((word) => word !== "");
 
-export const exPlantCustomTextSettings: CustomTextSettings = {
+export const custom_text: CustomTextSettings = {
   text: myArr,
   mode: "repeat",
   limit: { value: 100000, mode: "word" },

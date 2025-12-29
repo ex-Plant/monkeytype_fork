@@ -1,5 +1,5 @@
 import { CustomTextLimitMode, CustomTextMode } from "@monkeytype/schemas/util";
-import { exPlantCustomTextSettings } from "../../../ex_plant/ex-Plant_custom";
+import { custom_text } from "../../../ex_plant/custom_text";
 import { LocalStorageWithSchema } from "../utils/local-storage-with-schema";
 import { z } from "zod";
 import { CompletedEventCustomTextSchema } from "@monkeytype/schemas/results";
@@ -52,7 +52,7 @@ export type CustomTextLimit = z.infer<typeof CustomTextSettingsSchema>["limit"];
 //   pipeDelimiter: false,
 // };
 
-const defaultCustomTextSettings = exPlantCustomTextSettings;
+const defaultCustomTextSettings = custom_text;
 
 const customTextSettings = new LocalStorageWithSchema({
   key: "customTextSettings",
