@@ -55,7 +55,7 @@
     "knip": "knip"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.7.1",
+    "@commitlint/cli": "20.3.0",
     "@commitlint/config-conventional": "19.2.2",
     "@monkeytype/release": "workspace:*",
     "@vitest/coverage-v8": "4.0.15",
