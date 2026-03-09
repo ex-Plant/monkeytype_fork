@@ -27,7 +27,7 @@
     "@monkeytype/funbox": "workspace:*",
     "@monkeytype/schemas": "workspace:*",
     "@monkeytype/util": "workspace:*",
-    "@sentry/browser": "9.14.0",
+    "@sentry/browser": "10.42.0",
     "@sentry/vite-plugin": "3.3.1",
     "@ts-rest/core": "3.52.1",
     "animejs": "4.2.2",
