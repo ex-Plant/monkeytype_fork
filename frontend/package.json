@@ -96,7 +96,7 @@
     "vite-plugin-filter-replace": "0.1.14",
     "vite-plugin-html-inject": "1.1.2",
     "vite-plugin-inspect": "11.3.3",
-    "vite-plugin-minify": "2.1.0",
+    "vite-plugin-minify": "3.0.0",
     "vite-plugin-pwa": "1.1.0",
     "vitest": "4.0.15"
   },
