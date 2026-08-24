@@ -73,7 +73,7 @@
     "@types/subset-font": "1.4.3",
     "@types/throttle-debounce": "5.0.2",
     "@vitest/coverage-v8": "4.0.15",
-    "autoprefixer": "10.4.20",
+    "autoprefixer": "10.5.4",
     "concurrently": "8.2.2",
     "eslint": "9.39.1",
     "eslint-plugin-compat": "6.0.2",
